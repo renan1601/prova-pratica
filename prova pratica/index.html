@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+
+        h2 {
+            color: #0056b3;
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            width: calc(100% - 22px);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #0056b3;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004494;
+        }
+
+        #listaUsuarios {
+            margin-top: 20px;
+        }
+
+        .usuario {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .usuario strong {
+            color: #0056b3;
+        }
+
+        .usuario p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Usuários</h1>
+    
+    <form id="formularioCadastro">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+        
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <button type="button" onclick="adicionarUsuario()">Adicionar Usuário</button>
+    </form>
+    
+    <h2>Usuários Cadastrados</h2>
+    <button type="button" onclick="listarUsuarios()">Listar Usuários</button>
+
+    <script>
+        let usuarios = [];
+
+        function adicionarUsuario() {
+            let nome = document.getElementById("nome").value;
+            let idade = document.getElementById("idade").value;
+            let email = document.getElementById("email").value;
+
+            if (!nome || !idade || !email) {
+                alert("Erro: Todos os campos devem ser preenchidos.");
+                return;
+            }
+
+            if (idade <= 0) {
+                alert("Erro: A idade deve ser maior que 0.");
+                return;
+            }
+
+            let usuario = {
+                nome: nome,
+                idade: parseInt(idade),
+                email: email
+            };
+
+            usuarios.push(usuario);
+
+            alert("Usuário adicionado com sucesso!");
+
+            document.getElementById("formularioCadastro").reset();
+        }
+
+        function listarUsuarios() {
+            if (usuarios.length === 0) {
+                console.log("Nenhum usuário cadastrado.");
+            } else {
+                console.log("Lista de usuários cadastrados:");
+                usuarios.forEach(function(usuario, index) {
+                    console.log(`${index + 1}. Nome: ${usuario.nome}, Idade: ${usuario.idade}, Email: ${usuario.email}`);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
